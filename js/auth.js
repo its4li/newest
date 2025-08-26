@@ -43,12 +43,20 @@ function authenticateUser(username, password) {
     const validUsers = [
         { username: 'admin', password: 'admin123' },
         { username: 'officer1', password: 'pass123' },
-        { username: 'mohammadi', password: 'feta2024' }
+        { username: 'mohammadi', password: 'feta2024' },
+        { username: 'ahmadi', password: 'police123' },
+        { username: 'rezaei', password: 'cyber2024' }
     ];
     
     return validUsers.some(user => 
         user.username === username && user.password === password
     );
+}
+
+function fillCredentials(username, password) {
+    document.getElementById('username').value = username;
+    document.getElementById('password').value = password;
+    showAlert('اطلاعات ورود پر شد', 'success');
 }
 
 function showLoading() {
