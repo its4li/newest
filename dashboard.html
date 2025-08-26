@@ -10,12 +10,22 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header">
-                <img src="images/feta-logo.png" alt="پلیس فتا" class="sidebar-logo">
-                <h3>پلیس فتا</h3>
+                <div class="sidebar-logo-container">
+                    <img src="images/feta-logo.svg" alt="پلیس فتا" class="sidebar-logo">
+                    <div class="sidebar-org-info">
+                        <h3>پلیس فتا</h3>
+                        <span>سیستم رهگیری</span>
+                    </div>
+                </div>
             </div>
             
             <nav class="sidebar-nav">
@@ -99,7 +109,7 @@
             <!-- Overview Section -->
             <div id="overview" class="content-section active">
                 <div class="stats-grid">
-                    <div class="stat-card">
+                    <div class="stat-card bitcoin">
                         <div class="stat-icon bitcoin">
                             <i class="fab fa-bitcoin"></i>
                         </div>
@@ -108,7 +118,7 @@
                             <p>والت‌های رهگیری شده</p>
                         </div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card ethereum">
                         <div class="stat-icon ethereum">
                             <i class="fab fa-ethereum"></i>
                         </div>
@@ -117,7 +127,7 @@
                             <p>تراکنش‌های بررسی شده</p>
                         </div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card warning">
                         <div class="stat-icon warning">
                             <i class="fas fa-exclamation-triangle"></i>
                         </div>
@@ -126,7 +136,7 @@
                             <p>فعالیت مشکوک</p>
                         </div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card success">
                         <div class="stat-icon success">
                             <i class="fas fa-shield-check"></i>
                         </div>
@@ -176,6 +186,17 @@
                                     <i class="fas fa-search"></i>
                                     ردیابی
                                 </button>
+                            </div>
+                            <div class="sample-addresses">
+                                <h4>آدرس‌های نمونه برای تست:</h4>
+                                <div class="sample-item">
+                                    <span class="sample-label">Bitcoin:</span>
+                                    <code onclick="fillSampleAddress('1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', 'bitcoin')">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</code>
+                                </div>
+                                <div class="sample-item">
+                                    <span class="sample-label">Ethereum:</span>
+                                    <code onclick="fillSampleAddress('0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe', 'ethereum')">0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe</code>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -329,7 +350,7 @@
                         <h4>تنظیمات کاربری</h4>
                         <div class="setting-item">
                             <label>نام کاربری:</label>
-                            <input type="text" id="username" value="افسر محمدی">
+                            <input type="text" id="settingsUsername" value="افسر محمدی">
                         </div>
                         <div class="setting-item">
                             <label>ایمیل:</label>
