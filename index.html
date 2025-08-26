@@ -12,10 +12,13 @@
     <div class="landing-container">
         <div class="header-section">
             <div class="logo-container">
-                <img src="images/feta-logo.png" alt="لوگو پلیس فتا" class="feta-logo">
+                <div class="logo-wrapper">
+                    <img src="images/feta-logo.svg" alt="لوگو پلیس فتا" class="feta-logo">
+                </div>
                 <div class="org-info">
                     <h2>پلیس فتا</h2>
                     <p>پلیس فضای تولید و تبادل اطلاعات</p>
+                    <span class="org-subtitle">جمهوری اسلامی ایران</span>
                 </div>
             </div>
         </div>
@@ -32,29 +35,33 @@
                     <div class="feature-card">
                         <i class="fas fa-search"></i>
                         <h3>ردیابی والت‌ها</h3>
-                        <p>رهگیری کامل آدرس‌های مشکوک</p>
+                        <p>رهگیری کامل آدرس‌های مشکوک در تمام بلاک‌چین‌های اصلی</p>
                     </div>
                     <div class="feature-card">
                         <i class="fas fa-chart-line"></i>
                         <h3>تحلیل تراکنش‌ها</h3>
-                        <p>بررسی الگوهای مالی مشکوک</p>
+                        <p>بررسی الگوهای مالی مشکوک با استفاده از هوش مصنوعی</p>
                     </div>
                     <div class="feature-card">
                         <i class="fas fa-bell"></i>
                         <h3>هشدارهای هوشمند</h3>
-                        <p>اعلان فوری فعالیت‌های مشکوک</p>
+                        <p>اعلان فوری فعالیت‌های مشکوک و تراکنش‌های پرریسک</p>
                     </div>
                     <div class="feature-card">
                         <i class="fas fa-file-alt"></i>
                         <h3>گزارش‌گیری</h3>
-                        <p>تولید گزارش‌های تخصصی</p>
+                        <p>تولید گزارش‌های تخصصی برای مراجع قضایی</p>
                     </div>
                 </div>
             </div>
             
             <div class="login-section">
                 <div class="login-card">
-                    <h3>ورود به سیستم</h3>
+                    <div class="login-header">
+                        <img src="images/feta-logo.svg" alt="پلیس فتا" class="login-logo">
+                        <h3>ورود به سیستم</h3>
+                        <p>سیستم رهگیری ارزهای دیجیتال</p>
+                    </div>
                     <form id="loginForm">
                         <div class="input-group">
                             <i class="fas fa-user"></i>
@@ -64,17 +71,37 @@
                             <i class="fas fa-lock"></i>
                             <input type="password" id="password" placeholder="رمز عبور" required>
                         </div>
+                        <div class="remember-me">
+                            <label>
+                                <input type="checkbox" id="rememberMe">
+                                <span class="checkmark"></span>
+                                مرا به خاطر بسپار
+                            </label>
+                        </div>
                         <button type="submit" class="login-btn">
                             <i class="fas fa-sign-in-alt"></i>
                             ورود به داشبورد
                         </button>
                     </form>
+                    <div class="login-footer">
+                        <p>دسترسی محدود به پرسنل مجاز پلیس فتا</p>
+                    </div>
                 </div>
             </div>
         </div>
         
         <div class="footer-section">
-            <p>&copy; 1404 پلیس فتا - تمامی حقوق محفوظ است</p>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/feta-logo.svg" alt="پلیس فتا" class="footer-logo-img">
+                    <span>پلیس فتا</span>
+                </div>
+                <p>&copy; 1403 پلیس فضای تولید و تبادل اطلاعات - تمامی حقوق محفوظ است</p>
+                <div class="security-notice">
+                    <i class="fas fa-shield-check"></i>
+                    <span>این سیستم تحت نظارت و حفاظت امنیتی قرار دارد</span>
+                </div>
+            </div>
         </div>
     </div>
 
