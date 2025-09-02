@@ -7,13 +7,30 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script defer src="js/charts.js"></script>
+  <style>
+    /* فقط برای تست سریع */
+    body { margin:0; font-family: sans-serif; }
+    .dashboard { display: flex; min-height: 100vh; }
+    .sidebar { width: 220px; background:#111; color:#fff; padding:20px; }
+    .sidebar a { display:block; color:#fff; margin:8px 0; text-decoration:none; }
+    .main { flex:1; padding:20px; background:#f5f5f5; }
+    .content-section { display:none; }
+    .content-section.active { display:block; }
+    .open-btn {
+      display:inline-block;
+      padding:10px 15px;
+      background:#007bff;
+      color:#fff;
+      text-decoration:none;
+      border-radius:6px;
+    }
+  </style>
 </head>
 <body>
   <div class="dashboard">
     <!-- ===== Sidebar ===== -->
     <aside class="sidebar">
       <div class="profile">
-        <div class="avatar"></div>
         <h3>پلیس فتا</h3>
         <p>سیستم رهگیری</p>
       </div>
@@ -35,26 +52,6 @@
         <h2>نمای کلی سیستم</h2>
         <p>آمار و اطلاعات کلی سیستم رهگیری</p>
 
-        <div class="stats-grid">
-          <div class="stat-card danger">
-            <h3>23</h3>
-            <p>فعالیت مشکوک</p>
-          </div>
-          <div class="stat-card info">
-            <h3>15,892</h3>
-            <p>تراکنش‌های بررسی شده</p>
-          </div>
-          <div class="stat-card warning">
-            <h3>1,247</h3>
-            <p>والت‌های رهگیری شده</p>
-          </div>
-          <div class="stat-card success">
-            <h3>156</h3>
-            <p>پرونده‌های حل شده</p>
-          </div>
-        </div>
-
-        <!-- 🔹 Chart Section -->
         <div class="charts-grid">
           <div class="chart-card">
             <h3>قیمت بیت‌کوین</h3>
@@ -66,12 +63,10 @@
       <!-- 🔹 Wallet Tracker Section -->
       <section id="wallet-tracker" class="content-section">
         <h2>ردیابی والت</h2>
-        <div class="external-link-box">
-          <p>برای مشاهده‌ی کامل ابزار ردیابی والت روی دکمه زیر کلیک کنید:</p>
-          <a href="https://finalone-theta.vercel.app" target="_blank" class="open-btn">
-            باز کردن در صفحه جدید
-          </a>
-        </div>
+        <p>برای مشاهده‌ی کامل ابزار ردیابی والت روی دکمه زیر کلیک کنید:</p>
+        <a href="https://finalone-theta.vercel.app" target="_blank" class="open-btn">
+          باز کردن در صفحه جدید
+        </a>
       </section>
 
       <!-- سایر سکشن‌ها -->
