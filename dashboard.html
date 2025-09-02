@@ -1,105 +1,370 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>داشبورد سیستم رهگیری</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script defer src="js/charts.js"></script>
-  <style>
-    /* فقط برای تست سریع */
-    body { margin:0; font-family: sans-serif; }
-    .dashboard { display: flex; min-height: 100vh; }
-    .sidebar { width: 220px; background:#111; color:#fff; padding:20px; }
-    .sidebar a { display:block; color:#fff; margin:8px 0; text-decoration:none; }
-    .main { flex:1; padding:20px; background:#f5f5f5; }
-    .content-section { display:none; }
-    .content-section.active { display:block; }
-    .open-btn {
-      display:inline-block;
-      padding:10px 15px;
-      background:#007bff;
-      color:#fff;
-      text-decoration:none;
-      border-radius:6px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد رهگیری - پلیس فتا</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazir:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="dashboard">
-    <!-- ===== Sidebar ===== -->
-    <aside class="sidebar">
-      <div class="profile">
-        <h3>پلیس فتا</h3>
-        <p>سیستم رهگیری</p>
-      </div>
-      <nav class="menu">
-        <a href="#" onclick="showSection('overview')">نمای کلی</a>
-        <a href="#" onclick="showSection('wallet-tracker')">ردیابی والت</a>
-        <a href="#" onclick="showSection('transactions')">تحلیل تراکنش‌ها</a>
-        <a href="#" onclick="showSection('suspicious')">فعالیت‌های مشکوک</a>
-        <a href="#" onclick="showSection('reports')">گزارش‌ها</a>
-        <a href="#" onclick="showSection('alerts')">هشدارها</a>
-        <a href="#" onclick="showSection('settings')">تنظیمات</a>
-      </nav>
-    </aside>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
 
-    <!-- ===== Main Content ===== -->
-    <main class="main">
-      <!-- 🔹 Overview Section -->
-      <section id="overview" class="content-section active">
-        <h2>نمای کلی سیستم</h2>
-        <p>آمار و اطلاعات کلی سیستم رهگیری</p>
-
-        <div class="charts-grid">
-          <div class="chart-card">
-            <h3>قیمت بیت‌کوین</h3>
-            <canvas id="btcPriceChart"></canvas>
-          </div>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-container">
+                    <img src="images/feta-logo.svg" alt="پلیس فتا" class="sidebar-logo">
+                    <div class="sidebar-org-info">
+                        <h3>پلیس فتا</h3>
+                        <span>سیستم رهگیری</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="#" data-section="overview">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>نمای کلی</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://finalone-theta.vercel.app">
+                            <i class="fas fa-wallet"></i>
+                            <span>ردیابی والت</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="transaction-analysis">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>تحلیل تراکنش‌ها</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="suspicious-activity">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>فعالیت‌های مشکوک</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="reports">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>گزارش‌ها</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="alerts">
+                            <i class="fas fa-bell"></i>
+                            <span>هشدارها</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>تنظیمات</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <i class="fas fa-user-shield"></i>
+                    <span id="currentUser">افسر محمدی</span>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    خروج
+                </button>
+            </div>
         </div>
-      </section>
 
-      <!-- 🔹 Wallet Tracker Section -->
-      <section id="wallet-tracker" class="content-section">
-        <h2>ردیابی والت</h2>
-        <p>برای مشاهده‌ی کامل ابزار ردیابی والت روی دکمه زیر کلیک کنید:</p>
-        <a href="https://finalone-theta.vercel.app" target="_blank" class="open-btn">
-          باز کردن در صفحه جدید
-        </a>
-      </section>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1 id="pageTitle">نمای کلی سیستم</h1>
+                    <p id="pageSubtitle">آمار و اطلاعات کلی سیستم رهگیری</p>
+                </div>
+                <div class="top-bar-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="جستجو سریع...">
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </div>
+                </div>
+            </div>
 
-      <!-- سایر سکشن‌ها -->
-      <section id="transactions" class="content-section">
-        <h2>تحلیل تراکنش‌ها</h2>
-      </section>
+            <!-- Overview Section -->
+            <div id="overview" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card bitcoin">
+                        <div class="stat-icon bitcoin">
+                            <i class="fab fa-bitcoin"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalWallets">1,247</h3>
+                            <p>والت‌های رهگیری شده</p>
+                        </div>
+                    </div>
+                    <div class="stat-card ethereum">
+                        <div class="stat-icon ethereum">
+                            <i class="fab fa-ethereum"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalTransactions">15,892</h3>
+                            <p>تراکنش‌های بررسی شده</p>
+                        </div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-icon warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="suspiciousActivities">23</h3>
+                            <p>فعالیت مشکوک</p>
+                        </div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-icon success">
+                            <i class="fas fa-shield-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="resolvedCases">156</h3>
+                            <p>پرونده‌های حل شده</p>
+                        </div>
+                    </div>
+                </div>
 
-      <section id="suspicious" class="content-section">
-        <h2>فعالیت‌های مشکوک</h2>
-      </section>
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>نمودار فعالیت‌های روزانه</h3>
+                        <canvas id="dailyActivityChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>توزیع بلاک‌چین‌ها</h3>
+                        <canvas id="blockchainDistributionChart"></canvas>
+                    </div>
+                </div>
 
-      <section id="reports" class="content-section">
-        <h2>گزارش‌ها</h2>
-      </section>
+                <div class="recent-activity">
+                    <h3>آخرین فعالیت‌ها</h3>
+                    <div class="activity-list" id="recentActivityList">
+                        <!-- Dynamic content -->
+                    </div>
+                </div>
+            </div>
 
-      <section id="alerts" class="content-section">
-        <h2>هشدارها</h2>
-      </section>
+            <!-- Wallet Tracker Section -->
+            <div id="wallet-tracker" class="content-section">
+                <div class="tracker-header">
+                    <div class="search-section">
+                        <h3>ردیابی آدرس والت</h3>
+                        <div class="search-form">
+                            <div class="input-row">
+                                <select id="blockchainSelect" class="blockchain-select">
+                                    <option value="bitcoin">Bitcoin (BTC)</option>
+                                    <option value="ethereum">Ethereum (ETH)</option>
+                                    <option value="litecoin">Litecoin (LTC)</option>
+                                    <option value="bitcoin-cash">Bitcoin Cash (BCH)</option>
+                                    <option value="dogecoin">Dogecoin (DOGE)</option>
+                                </select>
+                                <input type="text" id="walletAddress" class="wallet-input" 
+                                       placeholder="آدرس والت را وارد کنید...">
+                                <button class="track-btn" onclick="trackWallet()">
+                                    <i class="fas fa-search"></i>
+                                    ردیابی
+                                </button>
+                            </div>
+                            <div class="sample-addresses">
+                                <h4>آدرس‌های نمونه برای تست:</h4>
+                                <div class="sample-item">
+                                    <span class="sample-label">Bitcoin:</span>
+                                    <code onclick="fillSampleAddress('1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', 'bitcoin')">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</code>
+                                </div>
+                                <div class="sample-item">
+                                    <span class="sample-label">Ethereum:</span>
+                                    <code onclick="fillSampleAddress('0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe', 'ethereum')">0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      <section id="settings" class="content-section">
-        <h2>تنظیمات</h2>
-      </section>
-    </main>
-  </div>
+                <div class="tracker-results" id="trackerResults">
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>برای شروع، آدرس والت مورد نظر را وارد کنید</p>
+                    </div>
+                </div>
+            </div>
 
-  <!-- 🔹 JS to Switch Sections -->
-  <script>
-    function showSection(sectionId) {
-      document.querySelectorAll('.content-section').forEach(sec => {
-        sec.classList.remove('active');
-      });
-      document.getElementById(sectionId).classList.add('active');
-    }
-  </script>
+            <!-- Transaction Analysis Section -->
+            <div id="transaction-analysis" class="content-section">
+                <div class="analysis-header">
+                    <h3>تحلیل تراکنش‌ها</h3>
+                    <div class="analysis-filters">
+                        <select id="analysisTimeframe">
+                            <option value="24h">24 ساعت گذشته</option>
+                            <option value="7d">7 روز گذشته</option>
+                            <option value="30d">30 روز گذشته</option>
+                            <option value="90d">90 روز گذشته</option>
+                        </select>
+                        <select id="analysisBlockchain">
+                            <option value="all">همه بلاک‌چین‌ها</option>
+                            <option value="bitcoin">Bitcoin</option>
+                            <option value="ethereum">Ethereum</option>
+                            <option value="litecoin">Litecoin</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="analysis-content">
+                    <div class="analysis-grid">
+                        <div class="analysis-card">
+                            <h4>حجم تراکنش‌ها</h4>
+                            <canvas id="transactionVolumeChart"></canvas>
+                        </div>
+                        <div class="analysis-card">
+                            <h4>الگوهای مشکوک</h4>
+                            <div class="suspicious-patterns" id="suspiciousPatterns">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suspicious Activity Section -->
+            <div id="suspicious-activity" class="content-section">
+                <div class="suspicious-header">
+                    <h3>فعالیت‌های مشکوک</h3>
+                    <div class="suspicious-filters">
+                        <select id="suspiciousLevel">
+                            <option value="all">همه سطوح</option>
+                            <option value="high">خطر بالا</option>
+                            <option value="medium">خطر متوسط</option>
+                            <option value="low">خطر پایین</option>
+                        </select>
+                        <select id="suspiciousStatus">
+                            <option value="all">همه وضعیت‌ها</option>
+                            <option value="pending">در انتظار بررسی</option>
+                            <option value="investigating">در حال بررسی</option>
+                            <option value="resolved">حل شده</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="suspicious-list" id="suspiciousList">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports" class="content-section">
+                <div class="reports-header">
+                    <h3>گزارش‌ها</h3>
+                    <button class="generate-report-btn" onclick="generateReport()">
+                        <i class="fas fa-plus"></i>
+                        تولید گزارش جدید
+                    </button>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h4>گزارش روزانه</h4>
+                        <p>خلاصه فعالیت‌های روز</p>
+                        <button class="download-btn">
+                            <i class="fas fa-download"></i>
+                            دانلود
+                        </button>
+                    </div>
+                    <div class="report-card">
+                        <h4>گزارش هفتگی</h4>
+                        <p>تحلیل فعالیت‌های هفته</p>
+                        <button class="download-btn">
+                            <i class="fas fa-download"></i>
+                            دانلود
+                        </button>
+                    </div>
+                    <div class="report-card">
+                        <h4>گزارش ماهانه</h4>
+                        <p>آمار کامل ماه</p>
+                        <button class="download-btn">
+                            <i class="fas fa-download"></i>
+                            دانلود
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts Section -->
+            <div id="alerts" class="content-section">
+                <div class="alerts-header">
+                    <h3>هشدارها</h3>
+                    <div class="alerts-actions">
+                        <button class="mark-all-read-btn">
+                            <i class="fas fa-check-double"></i>
+                            علامت‌گذاری همه به عنوان خوانده شده
+                        </button>
+                    </div>
+                </div>
+
+                <div class="alerts-list" id="alertsList">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings" class="content-section">
+                <div class="settings-header">
+                    <h3>تنظیمات سیستم</h3>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h4>تنظیمات API</h4>
+                        <div class="setting-item">
+                            <label>کلید API CryptoAPIs:</label>
+                            <input type="password" id="apiKey" placeholder="کلید API را وارد کنید">
+                        </div>
+                        <div class="setting-item">
+                            <label>حد آستانه هشدار (USD):</label>
+                            <input type="number" id="alertThreshold" value="10000">
+                        </div>
+                        <button class="save-settings-btn">ذخیره تنظیمات</button>
+                    </div>
+
+                    <div class="settings-card">
+                        <h4>تنظیمات کاربری</h4>
+                        <div class="setting-item">
+                            <label>نام کاربری:</label>
+                            <input type="text" id="settingsUsername" value="افسر محمدی">
+                        </div>
+                        <div class="setting-item">
+                            <label>ایمیل:</label>
+                            <input type="email" id="email" value="mohammadi@feta.police.ir">
+                        </div>
+                        <button class="save-settings-btn">ذخیره تنظیمات</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/wallet-tracker.js"></script>
+    <script src="js/charts.js"></script>
 </body>
 </html>
