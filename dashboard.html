@@ -147,102 +147,27 @@
                     </div>
                 </div>
 
+                <!-- فقط یک نمودار قیمت بیت کوین -->
                 <div class="charts-grid">
                     <div class="chart-card">
-                        <h3>نمودار فعالیت‌های روزانه</h3>
-                        <canvas id="dailyActivityChart"></canvas>
-                    </div>
-                    <div class="chart-card">
-                        <h3>توزیع بلاک‌چین‌ها</h3>
-                        <canvas id="blockchainDistributionChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="recent-activity">
-                    <h3>آخرین فعالیت‌ها</h3>
-                    <div class="activity-list" id="recentActivityList">
-                        <!-- Dynamic content -->
+                        <h3>قیمت بیت‌کوین</h3>
+                        <canvas id="btcPriceChart"></canvas>
                     </div>
                 </div>
             </div>
 
             <!-- Wallet Tracker Section -->
             <div id="wallet-tracker" class="content-section">
-                <div class="tracker-header">
-                    <div class="search-section">
-                        <h3>ردیابی آدرس والت</h3>
-                        <div class="search-form">
-                            <div class="input-row">
-                                <select id="blockchainSelect" class="blockchain-select">
-                                    <option value="bitcoin">Bitcoin (BTC)</option>
-                                    <option value="ethereum">Ethereum (ETH)</option>
-                                    <option value="litecoin">Litecoin (LTC)</option>
-                                    <option value="bitcoin-cash">Bitcoin Cash (BCH)</option>
-                                    <option value="dogecoin">Dogecoin (DOGE)</option>
-                                </select>
-                                <input type="text" id="walletAddress" class="wallet-input" 
-                                       placeholder="آدرس والت را وارد کنید...">
-                                <button class="track-btn" onclick="trackWallet()">
-                                    <i class="fas fa-search"></i>
-                                    ردیابی
-                                </button>
-                            </div>
-                            <div class="sample-addresses">
-                                <h4>آدرس‌های نمونه برای تست:</h4>
-                                <div class="sample-item">
-                                    <span class="sample-label">Bitcoin:</span>
-                                    <code onclick="fillSampleAddress('1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', 'bitcoin')">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</code>
-                                </div>
-                                <div class="sample-item">
-                                    <span class="sample-label">Ethereum:</span>
-                                    <code onclick="fillSampleAddress('0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe', 'ethereum')">0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe</code>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tracker-results" id="trackerResults">
-                    <div class="no-results">
-                        <i class="fas fa-search"></i>
-                        <p>برای شروع، آدرس والت مورد نظر را وارد کنید</p>
-                    </div>
-                </div>
+                <iframe src="https://finalone-theta.vercel.app" 
+                        style="width:100%; height:90vh; border:none; border-radius:12px;">
+                </iframe>
             </div>
 
             <!-- Transaction Analysis Section -->
             <div id="transaction-analysis" class="content-section">
                 <div class="analysis-header">
                     <h3>تحلیل تراکنش‌ها</h3>
-                    <div class="analysis-filters">
-                        <select id="analysisTimeframe">
-                            <option value="24h">24 ساعت گذشته</option>
-                            <option value="7d">7 روز گذشته</option>
-                            <option value="30d">30 روز گذشته</option>
-                            <option value="90d">90 روز گذشته</option>
-                        </select>
-                        <select id="analysisBlockchain">
-                            <option value="all">همه بلاک‌چین‌ها</option>
-                            <option value="bitcoin">Bitcoin</option>
-                            <option value="ethereum">Ethereum</option>
-                            <option value="litecoin">Litecoin</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="analysis-content">
-                    <div class="analysis-grid">
-                        <div class="analysis-card">
-                            <h4>حجم تراکنش‌ها</h4>
-                            <canvas id="transactionVolumeChart"></canvas>
-                        </div>
-                        <div class="analysis-card">
-                            <h4>الگوهای مشکوک</h4>
-                            <div class="suspicious-patterns" id="suspiciousPatterns">
-                                <!-- Dynamic content -->
-                            </div>
-                        </div>
-                    </div>
+                    <p>این بخش هنوز توسعه داده نشده است.</p>
                 </div>
             </div>
 
@@ -250,22 +175,7 @@
             <div id="suspicious-activity" class="content-section">
                 <div class="suspicious-header">
                     <h3>فعالیت‌های مشکوک</h3>
-                    <div class="suspicious-filters">
-                        <select id="suspiciousLevel">
-                            <option value="all">همه سطوح</option>
-                            <option value="high">خطر بالا</option>
-                            <option value="medium">خطر متوسط</option>
-                            <option value="low">خطر پایین</option>
-                        </select>
-                        <select id="suspiciousStatus">
-                            <option value="all">همه وضعیت‌ها</option>
-                            <option value="pending">در انتظار بررسی</option>
-                            <option value="investigating">در حال بررسی</option>
-                            <option value="resolved">حل شده</option>
-                        </select>
-                    </div>
                 </div>
-
                 <div class="suspicious-list" id="suspiciousList">
                     <!-- Dynamic content -->
                 </div>
@@ -275,55 +185,16 @@
             <div id="reports" class="content-section">
                 <div class="reports-header">
                     <h3>گزارش‌ها</h3>
-                    <button class="generate-report-btn" onclick="generateReport()">
-                        <i class="fas fa-plus"></i>
-                        تولید گزارش جدید
-                    </button>
                 </div>
-
-                <div class="reports-grid">
-                    <div class="report-card">
-                        <h4>گزارش روزانه</h4>
-                        <p>خلاصه فعالیت‌های روز</p>
-                        <button class="download-btn">
-                            <i class="fas fa-download"></i>
-                            دانلود
-                        </button>
-                    </div>
-                    <div class="report-card">
-                        <h4>گزارش هفتگی</h4>
-                        <p>تحلیل فعالیت‌های هفته</p>
-                        <button class="download-btn">
-                            <i class="fas fa-download"></i>
-                            دانلود
-                        </button>
-                    </div>
-                    <div class="report-card">
-                        <h4>گزارش ماهانه</h4>
-                        <p>آمار کامل ماه</p>
-                        <button class="download-btn">
-                            <i class="fas fa-download"></i>
-                            دانلود
-                        </button>
-                    </div>
-                </div>
+                <p>اینجا لیست گزارش‌ها قرار می‌گیرد.</p>
             </div>
 
             <!-- Alerts Section -->
             <div id="alerts" class="content-section">
                 <div class="alerts-header">
                     <h3>هشدارها</h3>
-                    <div class="alerts-actions">
-                        <button class="mark-all-read-btn">
-                            <i class="fas fa-check-double"></i>
-                            علامت‌گذاری همه به عنوان خوانده شده
-                        </button>
-                    </div>
                 </div>
-
-                <div class="alerts-list" id="alertsList">
-                    <!-- Dynamic content -->
-                </div>
+                <p>لیست هشدارها.</p>
             </div>
 
             <!-- Settings Section -->
@@ -331,40 +202,12 @@
                 <div class="settings-header">
                     <h3>تنظیمات سیستم</h3>
                 </div>
-
-                <div class="settings-grid">
-                    <div class="settings-card">
-                        <h4>تنظیمات API</h4>
-                        <div class="setting-item">
-                            <label>کلید API CryptoAPIs:</label>
-                            <input type="password" id="apiKey" placeholder="کلید API را وارد کنید">
-                        </div>
-                        <div class="setting-item">
-                            <label>حد آستانه هشدار (USD):</label>
-                            <input type="number" id="alertThreshold" value="10000">
-                        </div>
-                        <button class="save-settings-btn">ذخیره تنظیمات</button>
-                    </div>
-
-                    <div class="settings-card">
-                        <h4>تنظیمات کاربری</h4>
-                        <div class="setting-item">
-                            <label>نام کاربری:</label>
-                            <input type="text" id="settingsUsername" value="افسر محمدی">
-                        </div>
-                        <div class="setting-item">
-                            <label>ایمیل:</label>
-                            <input type="email" id="email" value="mohammadi@feta.police.ir">
-                        </div>
-                        <button class="save-settings-btn">ذخیره تنظیمات</button>
-                    </div>
-                </div>
+                <p>اینجا تنظیمات قرار می‌گیرد.</p>
             </div>
         </div>
     </div>
 
     <script src="js/dashboard.js"></script>
-    <script src="js/wallet-tracker.js"></script>
     <script src="js/charts.js"></script>
 </body>
 </html>
